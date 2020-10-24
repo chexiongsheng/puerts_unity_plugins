@@ -55,5 +55,5 @@ node $GITHUB_WORKSPACE/v8-build/genBlobHeader.js "android armv7" out.gn/arm.rele
 
 mkdir -p output/v8/Lib/Android/armv7
 cp out.gn/arm.release/obj/libwee8.a output/v8/Lib/Android/armv7/
-mkdir -p output/v8/Inc
-cp SnapshotBlob.h output/v8/Inc/
+mkdir -p output/v8/Inc/Blob/Android/armv7a
+cp SnapshotBlob.h output/v8/Inc/Blob/Android/armv7a/

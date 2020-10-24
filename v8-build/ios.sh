@@ -37,5 +37,5 @@ node $GITHUB_WORKSPACE/v8-build/genBlobHeader.js "ios arm64" out.gn/arm64.releas
 
 mkdir -p output/v8/Lib/iOS/arm64
 cp out.gn/arm64.release/obj/libwee8.a output/v8/Lib/iOS/arm64/
-mkdir -p output/v8/Inc
-cp SnapshotBlob.h output/v8/Inc/
+mkdir -p output/v8/Inc/Blob/iOS/arm64
+cp SnapshotBlob.h output/v8/Inc/Blob/iOS/arm64

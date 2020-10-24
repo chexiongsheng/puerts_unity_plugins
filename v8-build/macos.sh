@@ -37,8 +37,8 @@ node $GITHUB_WORKSPACE/v8-build/genBlobHeader.js "osx 64" out.gn/x64.release/sna
 
 mkdir -p output/v8/Lib/macOS
 cp out.gn/x64.release/obj/libwee8.a output/v8/Lib/macOS/
-mkdir -p output/v8/Inc
-cp SnapshotBlob.h output/v8/Inc/
+mkdir -p output/v8/Inc/Blob/macOS
+cp SnapshotBlob.h output/v8/Inc/Blob/macOS/
 
 echo "=====[ Copy V8 header ]====="
 cp -r include/* output/v8/Inc/

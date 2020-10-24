@@ -36,5 +36,5 @@ node %~dp0\genBlobHeader.js "window x64" out.gn\x64.release\snapshot_blob.bin
 
 md output\v8\Lib\Win64MD
 copy /Y out.gn\x64.release\obj\wee8.lib output\v8\Lib\Win64MD\
-md output\v8\Inc
-copy SnapshotBlob.h output\v8\Inc\
+md output\v8\Inc\Blob\Win64MD
+copy SnapshotBlob.h output\v8\Inc\Blob\Win64MD\
