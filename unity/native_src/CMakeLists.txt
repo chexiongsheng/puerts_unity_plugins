@@ -122,7 +122,7 @@ elseif ( ANDROID )
 
     if( ANDROID_ABI STREQUAL "armeabi-v7a")
         target_link_libraries(puerts
-            ${V8_ENGINE}/Lib/Android/armv7a/libwee8.a
+            ${V8_ENGINE}/Lib/Android/armv7/libwee8.a
             ${log-lib}
         )
         target_compile_definitions (puerts PRIVATE PLATFORM_ANDROID_ARM)
