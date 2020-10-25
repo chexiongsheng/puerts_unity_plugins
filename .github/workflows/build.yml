@@ -21,7 +21,7 @@ jobs:
           wget -O NDK -q https://dl.google.com/android/repository/android-ndk-r21b-linux-x86_64.zip
           sudo apt install unzip -y
           unzip -q NDK
-          ANDROID_NDK=$(pwd)/android-ndk-r21b
+          ANDROID_NDK_HOME=$(pwd)/android-ndk-r21b
       - name: Build
         run: |
           cd unity/native_src
@@ -86,7 +86,7 @@ jobs:
       - name: Build
         run: |
           cd unity\native_src
-          call make_win64.bat
+          .\make_win64.bat
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
