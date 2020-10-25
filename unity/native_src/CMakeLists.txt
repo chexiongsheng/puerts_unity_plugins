@@ -45,7 +45,6 @@ include_directories(
     ${WEBSOCKET_INC}
     ${ASIO_INC}
     Inc
-    ${CMAKE_SOURCE_DIR}/../../unreal/Puerts/Source/JsEnv/Private
 )
 
 set ( PUERTS_INC
