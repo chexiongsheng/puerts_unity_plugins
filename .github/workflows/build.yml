@@ -88,6 +88,7 @@ jobs:
         run: |
           cd unity\native_src
           .\make_win64.bat
+          .\make_win32.bat
       - name: Upload
         uses: actions/upload-artifact@v2
         with:

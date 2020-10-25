@@ -23,7 +23,13 @@
 #include "V8InspectorImpl.h"
 
 #if defined(PLATFORM_WINDOWS)
+
+#if _WIN64
 #include "Blob/Win64/SnapshotBlob.h"
+#else
+#include "Blob/Win32/SnapshotBlob.h"
+#endif
+
 #elif defined(PLATFORM_ANDROID_ARM)
 #include "Blob/Android/armv7a/SnapshotBlob.h"
 #elif defined(PLATFORM_ANDROID_ARM64)

@@ -110,12 +110,21 @@ if ( WIN32 AND NOT CYGWIN )
 endif ( )
 
 if ( WIN32 )
-    target_link_libraries(puerts
-        ${V8_ENGINE}/Lib/Win64/wee8.lib
-        winmm.lib
-        dbghelp.lib
-        shlwapi.lib
-    )
+    if("${CMAKE_SIZEOF_VOID_P}" STREQUAL "4")
+        target_link_libraries(puerts
+            ${V8_ENGINE}/Lib/Win32/wee8.lib
+            winmm.lib
+            dbghelp.lib
+            shlwapi.lib
+        )
+    else ()
+        target_link_libraries(puerts
+            ${V8_ENGINE}/Lib/Win64/wee8.lib
+            winmm.lib
+            dbghelp.lib
+            shlwapi.lib
+        )
+    endif ()
     target_compile_definitions (puerts PRIVATE PLATFORM_WINDOWS)
 elseif ( ANDROID )
     find_library(log-lib log )
