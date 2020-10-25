@@ -15,7 +15,7 @@ jobs:
     - name: Run build script
       run: |
         cd $GITHUB_WORKSPACE
-        sh ./v8-build/android_armv8.sh $VERSION
+        sh ./v8-build/android_armv8.sh ${{VERSION}}
     - uses: actions/upload-artifact@v2
       with:
         name: v8_engine
@@ -29,7 +29,7 @@ jobs:
     - name: Run build script
       run: |
         cd $GITHUB_WORKSPACE
-        sh ./v8-build/android_armv7.sh $VERSION
+        sh ./v8-build/android_armv7.sh ${{VERSION}}
     - uses: actions/upload-artifact@v2
       with:
         name: v8_engine
@@ -44,7 +44,7 @@ jobs:
       shell: cmd
       run: |
         cd %GITHUB_WORKSPACE%
-        call .\v8-build\windows_64.cmd $VERSION
+        call .\v8-build\windows_64.cmd ${{VERSION}}
     - uses: actions/upload-artifact@v2
       with:
         name: v8_engine
@@ -59,7 +59,7 @@ jobs:
       shell: cmd
       run: |
         cd %GITHUB_WORKSPACE%
-        call .\v8-build\windows_64MD.cmd $VERSION
+        call .\v8-build\windows_64MD.cmd ${{VERSION}}
     - uses: actions/upload-artifact@v2
       with:
         name: v8_engine
@@ -74,7 +74,7 @@ jobs:
       shell: cmd
       run: |
         cd %GITHUB_WORKSPACE%
-        call .\v8-build\windows_32.cmd $VERSION
+        call .\v8-build\windows_32.cmd ${{VERSION}}
     - uses: actions/upload-artifact@v2
       with:
         name: v8_engine
@@ -88,7 +88,7 @@ jobs:
     - name: Run build script
       run: |
         cd $GITHUB_WORKSPACE
-        sh ./v8-build/macos.sh $VERSION
+        sh ./v8-build/macos.sh ${{VERSION}}
     - uses: actions/upload-artifact@v2
       with:
         name: v8_engine
@@ -102,7 +102,7 @@ jobs:
     - name: Run build script
       run: |
         cd $GITHUB_WORKSPACE
-        sh ./v8-build/ios.sh $VERSION
+        sh ./v8-build/ios.sh ${{VERSION}}
     - uses: actions/upload-artifact@v2
       with:
         name: v8_engine
