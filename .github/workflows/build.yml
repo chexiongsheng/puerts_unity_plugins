@@ -21,7 +21,7 @@ jobs:
           wget -O NDK -q https://dl.google.com/android/repository/android-ndk-r21b-linux-x86_64.zip
           sudo apt install unzip -y
           unzip -q NDK
-          ANDROID_NDK_HOME=$(pwd)/android-ndk-r21b
+          export ANDROID_NDK=$(pwd)/android-ndk-r21b
       - name: Build
         run: |
           cd unity/native_src
