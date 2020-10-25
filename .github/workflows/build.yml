@@ -1,0 +1,89 @@
+name: build
+
+on: 
+  workflow_dispatch:
+  
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install NDK
+        run: |
+          cd ~
+          wget -O NDK -q https://dl.google.com/android/repository/android-ndk-r15c-linux-x86_64.zip
+          sudo apt install unzip -y
+          unzip -q NDK
+          ANDROID_NDK_HOME=$(pwd)/android-ndk-r15c
+      - name: Download artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: build_v8.yml
+          name: v8_engine
+          path: unity/native_src/
+      - name: Build
+        run: |
+          cd unity/native_src
+          sh ./make_android.sh
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          path: ./unity/Assets/Plugins/**/*
+          name: Puerts_Unity_Plugins
+  ios:
+    runs-on: macos-10.15
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: build_v8.yml
+          name: v8_engine
+          path: unity/native_src/
+      - name: Build
+        run: |
+          cd unity/native_src
+          sh ./make_ios.sh
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          path: ./unity/Assets/Plugins/**/*
+          name: Puerts_Unity_Plugins
+  osx:
+    runs-on: macos-10.15
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: build_v8.yml
+          name: v8_engine
+          path: unity/native_src/
+      - name: Build
+        run: |
+          cd unity/native_src
+          sh ./make_osx.sh
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          path: ./unity/Assets/Plugins/**/*
+          name: Puerts_Unity_Plugins
+#  windows:
+#    runs-on: windows-2019
+#
+#    steps:
+#      - uses: actions/checkout@v2
+#
+#      - name: Build
+#        run: |
+#          cd unity\native_src
+#          call make_win64.bat
+#      - name: Upload
+#        uses: actions/upload-artifact@v2
+#        with:
+#          path: ./unity/Assets/Plugins/**/*
+#          name: Puerts_Unity_Plugins
+
