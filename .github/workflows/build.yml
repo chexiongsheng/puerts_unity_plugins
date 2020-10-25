@@ -25,7 +25,8 @@ jobs:
       - name: Build
         run: |
           cd unity/native_src
-          sh ./make_android.sh
+          chmod 777 make_android.sh
+          ./make_android.sh
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
