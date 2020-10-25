@@ -48,7 +48,22 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: v8_engine
-        path: ~/v8/v8/output/**/*
+        path: v8/v8/output/**/*
+        
+  build_windows_md:
+    name: Windows-MD
+    runs-on: windows-2019
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run build script
+      shell: cmd
+      run: |
+        cd %GITHUB_WORKSPACE%
+        call .\v8-build\windows_64MD.cmd $VERSION
+    - uses: actions/upload-artifact@v2
+      with:
+        name: v8_engine
+        path: v8/v8/output/**/*
           
   build_macos:
     name: macOS
