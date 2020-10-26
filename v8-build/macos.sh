@@ -23,12 +23,13 @@ python ./tools/dev/v8gen.py x64.release -vv -- '
 target_os = "mac"
 is_debug = false
 v8_enable_i18n_support= false
-v8_target_cpu = "arm64"
+v8_target_cpu = "x64"
 v8_use_snapshot = true
 v8_use_external_startup_data = true
 v8_static_library = true
-strip_debug_info = false
-symbol_level=1
+strip_debug_info = true
+symbol_level=0
+v8_enable_pointer_compression=false
 '
 ninja -C out.gn/x64.release -t clean
 ninja -C out.gn/x64.release wee8
