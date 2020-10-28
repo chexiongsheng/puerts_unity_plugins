@@ -36,7 +36,7 @@ jobs:
         path: ~/v8/v8/output/**/*
         
   build_android_x86_64:
-    name: Android (armeabi-v7a)
+    name: Android (x86_64)
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v2
