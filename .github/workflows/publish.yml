@@ -24,7 +24,7 @@ jobs:
           
       - name: Create Unity.tar.gz and UE4.tar.gz
         run: |
-          tar cvfz Unity.tar.gz -C unity/Assets *
+          tar cvfz Unity.tar.gz -C unity/Assets Plugins Puerts
           sed -i 's/UseNewV8\s\+=\s\+true/UseNewV8 = false/g' unreal/Puerts/Source/JsEnv/JsEnv.Build.cs
           tar cvfz UE4.tar.gz -C unreal Puerts
           
