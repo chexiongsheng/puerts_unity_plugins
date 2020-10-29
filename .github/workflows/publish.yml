@@ -24,9 +24,9 @@ jobs:
           
       - name: Create Unity.tar.gz and UE4.tar.gz
         run: |
-          tar cvfz Unity.tar.gz unity/Assets/*
+          tar cvfz Unity.tar.gz -C unity/Assets unity/Assets/*
           sed -i 's/UseNewV8\s\+=\s\+true/UseNewV8 = false/g' unreal/Puerts/Source/JsEnv/JsEnv.Build.cs
-          tar cvfz UE4.tar.gz unreal/Puerts
+          tar cvfz UE4.tar.gz -C unreal unreal/Puerts
           
       - name: Download artifact
         uses: dawidd6/action-download-artifact@v2
@@ -39,7 +39,7 @@ jobs:
           rm -rf unreal/Puerts/ThirdParty/Include/v8
           rm -rf unreal/Puerts/ThirdParty/Library/V8
           sed -i 's/UseNewV8\s\+=\s\+false/UseNewV8 = true/g' unreal/Puerts/Source/JsEnv/JsEnv.Build.cs
-          tar cvfz UE4_8.4.371.19.tar.gz unreal/Puerts
+          tar cvfz UE4_8.4.371.19.tar.gz -C unreal unreal/Puerts
           
       - name: Create Release
         id: create_release
