@@ -29,14 +29,15 @@ ios_enable_code_signing = false
 target_os = "ios"
 target_cpu = "arm64"
 v8_enable_pointer_compression = false
+v8_monolithic = true
 '
 ninja -C out.gn/arm64.release -t clean
-ninja -C out.gn/arm64.release wee8
-strip -S out.gn/arm64.release/obj/libwee8.a
+ninja -C out.gn/arm64.release
+strip -S out.gn/arm64.release/obj/libv8_monolith.a
 
 node $GITHUB_WORKSPACE/v8-build/genBlobHeader.js "ios arm64" out.gn/arm64.release/snapshot_blob.bin
 
 mkdir -p output/v8/Lib/iOS/arm64
-cp out.gn/arm64.release/obj/libwee8.a output/v8/Lib/iOS/arm64/
+cp out.gn/arm64.release/obj/libv8_monolith.a output/v8/Lib/iOS/arm64/
 mkdir -p output/v8/Inc/Blob/iOS/arm64
 cp SnapshotBlob.h output/v8/Inc/Blob/iOS/arm64/
