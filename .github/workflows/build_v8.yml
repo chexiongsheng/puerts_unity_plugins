@@ -64,7 +64,7 @@ jobs:
         name: v8_bin
         path: v8/v8/output/**/*
         
-  build_windows:
+  build_windows_db:
     name: Windows-Debug
     runs-on: windows-2019
     steps:
