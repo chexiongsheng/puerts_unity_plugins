@@ -20,7 +20,6 @@ gclient sync
 
 echo "=====[ Building V8 ]====="
 python ./tools/dev/v8gen.py arm64.release -vv -- '
-v8_use_external_startup_data = true
 v8_use_snapshot = true
 v8_enable_i18n_support = false
 is_debug = false
