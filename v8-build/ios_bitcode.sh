@@ -30,6 +30,7 @@ target_os = "ios"
 use_xcode_clang = true
 v8_enable_pointer_compression = false
 enable_ios_bitcode = true
+ios_deployment_target = "9.0"
 '
 ninja -C out.gn/arm.release -t clean
 ninja -C out.gn/arm.release wee8
