@@ -19,7 +19,7 @@ gclient sync
 
 
 echo "=====[ Building V8 ]====="
-python ./tools/dev/v8gen.py arm.release -vv -- '
+python ./tools/dev/v8gen.py arm64.release -vv -- '
 v8_use_external_startup_data = false
 v8_use_snapshot = false
 v8_enable_i18n_support = false
@@ -27,14 +27,18 @@ is_debug = false
 v8_static_library = true
 ios_enable_code_signing = false
 target_os = "ios"
+target_cpu = "arm64"
 use_xcode_clang = true
 v8_enable_pointer_compression = false
 enable_ios_bitcode = true
 ios_deployment_target = "9.0"
 '
-ninja -C out.gn/arm.release -t clean
-ninja -C out.gn/arm.release wee8
+ninja -C out.gn/arm64.release -t clean
+ninja -C out.gn/arm64.release wee8
 
+node $GITHUB_WORKSPACE/v8-build/genBlobHeader.js "ios arm64" out.gn/arm64.release/snapshot_blob.bin
 
 mkdir -p output/v8/Lib/iOS/bitcode
-cp out.gn/arm.release/obj/libwee8.a output/v8/Lib/iOS/bitcode/
+cp out.gn/arm64.release/obj/libwee8.a output/v8/Lib/iOS/bitcode/
+mkdir -p output/v8/Inc/Blob/iOS/arm64
+cp SnapshotBlob.h output/v8/Inc/Blob/iOS/bitcode/
