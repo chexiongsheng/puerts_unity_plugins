@@ -18,7 +18,7 @@ jobs:
         sh ./v8-build/android_armv8.sh ${{env.VERSION}}
     - uses: actions/upload-artifact@v2
       with:
-        name: v8_engine
+        name: v8_bin
         path: ~/v8/v8/output/**/*
 
   build_android_arm_v7:
@@ -32,7 +32,7 @@ jobs:
         sh ./v8-build/android_armv7.sh ${{env.VERSION}}
     - uses: actions/upload-artifact@v2
       with:
-        name: v8_engine
+        name: v8_bin
         path: ~/v8/v8/output/**/*
         
   build_android_x86_64:
@@ -46,7 +46,7 @@ jobs:
         sh ./v8-build/android_x64.sh ${{env.VERSION}}
     - uses: actions/upload-artifact@v2
       with:
-        name: v8_engine
+        name: v8_bin
         path: ~/v8/v8/output/**/*
 
   build_windows:
@@ -61,7 +61,22 @@ jobs:
         call .\v8-build\windows_64.cmd ${{env.VERSION}}
     - uses: actions/upload-artifact@v2
       with:
-        name: v8_engine
+        name: v8_bin
+        path: v8/v8/output/**/*
+        
+  build_windows:
+    name: Windows-Debug
+    runs-on: windows-2019
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run build script
+      shell: cmd
+      run: |
+        cd %GITHUB_WORKSPACE%
+        call .\v8-build\windows_64Debug.cmd ${{env.VERSION}}
+    - uses: actions/upload-artifact@v2
+      with:
+        name: v8_bin
         path: v8/v8/output/**/*
         
   build_windows_md:
@@ -76,7 +91,7 @@ jobs:
         call .\v8-build\windows_64MD.cmd ${{env.VERSION}}
     - uses: actions/upload-artifact@v2
       with:
-        name: v8_engine
+        name: v8_bin
         path: v8/v8/output/**/*
         
   build_windows_32:
@@ -91,7 +106,7 @@ jobs:
         call .\v8-build\windows_32.cmd ${{env.VERSION}}
     - uses: actions/upload-artifact@v2
       with:
-        name: v8_engine
+        name: v8_bin
         path: v8/v8/output/**/*
           
   build_macos:
@@ -105,7 +120,7 @@ jobs:
         sh ./v8-build/macos.sh ${{env.VERSION}}
     - uses: actions/upload-artifact@v2
       with:
-        name: v8_engine
+        name: v8_bin
         path: ~/v8/v8/output/**/*
 
   build_ios:
@@ -119,7 +134,7 @@ jobs:
         sh ./v8-build/ios.sh ${{env.VERSION}}
     - uses: actions/upload-artifact@v2
       with:
-        name: v8_engine
+        name: v8_bin
         path: ~/v8/v8/output/**/*
         
 
