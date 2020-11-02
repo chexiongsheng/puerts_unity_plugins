@@ -29,6 +29,7 @@ ios_enable_code_signing = false
 target_os = "ios"
 use_xcode_clang = true
 v8_enable_pointer_compression = false
+enable_ios_bitcode = true
 '
 ninja -C out.gn/arm.release -t clean
 ninja -C out.gn/arm.release wee8
