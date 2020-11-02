@@ -19,7 +19,7 @@ gclient sync
 
 
 echo "=====[ Building V8 ]====="
-python ./tools/dev/v8gen.py bitcode.release -vv -- '
+python ./tools/dev/v8gen.py arm.release -vv -- '
 v8_use_external_startup_data = false
 v8_use_snapshot = false
 v8_enable_i18n_support = false
@@ -30,9 +30,9 @@ target_os = "ios"
 use_xcode_clang = true
 v8_enable_pointer_compression = false
 '
-ninja -C out.gn/bitcode.release -t clean
-ninja -C out.gn/bitcode.release wee8
+ninja -C out.gn/arm.release -t clean
+ninja -C out.gn/arm.release wee8
 
 
 mkdir -p output/v8/Lib/iOS/bitcode
-cp out.gn/bitcode.release/obj/libwee8.a output/v8/Lib/iOS/bitcode/
+cp out.gn/arm.release/obj/libwee8.a output/v8/Lib/iOS/bitcode/
