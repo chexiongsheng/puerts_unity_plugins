@@ -64,20 +64,20 @@ jobs:
         name: v8_bin
         path: v8/v8/output/**/*
         
-  build_windows_db:
-    name: Windows-Debug
-    runs-on: windows-2019
-    steps:
-    - uses: actions/checkout@v2
-    - name: Run build script
-      shell: cmd
-      run: |
-        cd %GITHUB_WORKSPACE%
-        call .\v8-build\windows_64Debug.cmd ${{env.VERSION}}
-    - uses: actions/upload-artifact@v2
-      with:
-        name: v8_bin
-        path: v8/v8/output/**/*
+#  build_windows_db:
+#    name: Windows-Debug
+#    runs-on: windows-2019
+#    steps:
+#    - uses: actions/checkout@v2
+#    - name: Run build script
+#      shell: cmd
+#      run: |
+#        cd %GITHUB_WORKSPACE%
+#        call .\v8-build\windows_64Debug.cmd ${{env.VERSION}}
+#    - uses: actions/upload-artifact@v2
+#      with:
+#        name: v8_bin
+#        path: v8/v8/output/**/*
         
   build_windows_md:
     name: Windows-MD
@@ -137,4 +137,16 @@ jobs:
         name: v8_bin
         path: ~/v8/v8/output/**/*
         
-
+  build_ios_bc:
+    name: iOS_bc
+    runs-on: macos-10.15
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run build script
+      run: |
+        cd $GITHUB_WORKSPACE
+        sh ./v8-build/ios_bitcode.sh ${{env.VERSION}}
+    - uses: actions/upload-artifact@v2
+      with:
+        name: v8_bin
+        path: ~/v8/v8/output/**/*
