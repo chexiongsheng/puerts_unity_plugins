@@ -14,7 +14,6 @@ echo "=====[ Fetching V8 ]====="
 fetch v8
 echo "target_os = ['ios']" >> .gclient
 cd ~/v8/v8
-git checkout refs/tags/$VERSION
 gclient sync
 
 
