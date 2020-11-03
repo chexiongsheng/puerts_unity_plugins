@@ -80,7 +80,7 @@ jobs:
     - uses: msys2/setup-msys2@v2
       with:
         update: true
-        install: cmake
+        install: 'cmake base-devel'
     - name: Run build script
       run: |
         msys2 -c 'cmake --version'
