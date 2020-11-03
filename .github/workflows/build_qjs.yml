@@ -80,11 +80,8 @@ jobs:
     - uses: msys2/setup-msys2@v2
     - name: Run build script
       run: |
-        where cmake
         cmake --version
-        choco install cmake
-        cmake --version
-        msys2 -c 'which cmake'
+        msys2 -c 'cmake --version'
         msys2 -c 'cp -r qjs-build/* quickjs/'
         cd quickjs
         msys2 -c 'sh make_linux64.sh'
