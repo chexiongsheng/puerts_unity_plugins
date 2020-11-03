@@ -78,11 +78,10 @@ jobs:
         repository: 'bellard/quickjs'
         path: ${{github.workspace}}/quickjs/
     - uses: msys2/setup-msys2@v2
-    - name: msys2 cmake
-      run: |
-        msys2 -c 'sudo pacman --noconfirm -Sy cmake'
     - name: Run build script
       run: |
+        where cmake
+        msys2 -c 'which cmake'
         msys2 -c 'cp -r qjs-build/* quickjs/'
         cd quickjs
         msys2 -c 'sh make_linux64.sh'
