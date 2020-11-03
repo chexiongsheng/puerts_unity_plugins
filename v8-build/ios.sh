@@ -37,8 +37,10 @@ strip -S out.gn/arm64.release/obj/libv8_monolith.a
 
 mkdir -p output/v8/Lib/iOS/arm64
 cp out.gn/arm64.release/obj/libv8_monolith.a output/v8/Lib/iOS/arm64/
+
+mkdir -p output/v8/Inc/Blob/iOS/arm64
 cp out.gn/arm64.release/*.bin output/v8/Inc/Blob/iOS/arm64/
 
-node $GITHUB_WORKSPACE/v8-build/genBlobHeader.js "ios arm64" out.gn/arm64.release/snapshot_blob.bin
-mkdir -p output/v8/Inc/Blob/iOS/arm64
-cp SnapshotBlob.h output/v8/Inc/Blob/iOS/arm64/
+#node $GITHUB_WORKSPACE/v8-build/genBlobHeader.js "ios arm64" out.gn/arm64.release/snapshot_blob.bin
+#mkdir -p output/v8/Inc/Blob/iOS/arm64
+#cp SnapshotBlob.h output/v8/Inc/Blob/iOS/arm64/
