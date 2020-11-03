@@ -80,7 +80,7 @@ jobs:
     - uses: msys2/setup-msys2@v2
     - name: msys2 cmake
       run: |
-        msys2 -c 'pacman -Sy cmake'
+        msys2 -c 'sudo pacman --noconfirm -Sy cmake'
     - name: Run build script
       run: |
         msys2 -c 'cp -r qjs-build/* quickjs/'
