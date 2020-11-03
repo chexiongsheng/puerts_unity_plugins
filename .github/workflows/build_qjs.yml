@@ -81,6 +81,9 @@ jobs:
     - name: Run build script
       run: |
         where cmake
+        cmake --version
+        choco install cmake
+        cmake --version
         msys2 -c 'which cmake'
         msys2 -c 'cp -r qjs-build/* quickjs/'
         cd quickjs
