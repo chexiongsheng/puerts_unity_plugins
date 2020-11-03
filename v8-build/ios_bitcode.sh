@@ -14,8 +14,10 @@ echo "=====[ Fetching V8 ]====="
 fetch v8
 echo "target_os = ['ios']" >> .gclient
 cd ~/v8/v8
+git checkout refs/tags/$VERSION
 gclient sync
 
+cp $GITHUB_WORKSPACE/patch/8.4.371.19/bitcode/BUILD.gn third_party/inspector_protocol/
 
 echo "=====[ Building V8 ]====="
 python ./tools/dev/v8gen.py arm64.release -vv -- '
