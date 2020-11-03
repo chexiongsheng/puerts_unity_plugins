@@ -17,7 +17,7 @@ jobs:
     - name: Run build script
       run: |
         cd $GITHUB_WORKSPACE
-        cp qjs-build/* $GITHUB_WORKSPACE/quickjs/
+        cp -r qjs-build/* $GITHUB_WORKSPACE/quickjs/
         cd $GITHUB_WORKSPACE/quickjs/
         sh make_linux64.sh
     - uses: actions/upload-artifact@v2
@@ -38,7 +38,7 @@ jobs:
     - name: Run build script
       run: |
         cd $GITHUB_WORKSPACE
-        cp qjs-build/* $GITHUB_WORKSPACE/quickjs/
+        cp -r qjs-build/* $GITHUB_WORKSPACE/quickjs/
         cd $GITHUB_WORKSPACE/quickjs/
         sh make_osx.sh
     - uses: actions/upload-artifact@v2
@@ -59,7 +59,7 @@ jobs:
     - name: Run build script
       run: |
         cd $GITHUB_WORKSPACE
-        cp qjs-build/* $GITHUB_WORKSPACE/quickjs/
+        cp -r qjs-build/* $GITHUB_WORKSPACE/quickjs/
         cd $GITHUB_WORKSPACE/quickjs/
         sh make_ios.sh
     - uses: actions/upload-artifact@v2
