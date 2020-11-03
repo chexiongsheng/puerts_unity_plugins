@@ -80,9 +80,8 @@ jobs:
     - uses: msys2/setup-msys2@v2
     - name: Run build script
       run: |
-        cd %GITHUB_WORKSPACE%
-        msys2 -c 'cp -r qjs-build/* %GITHUB_WORKSPACE%/quickjs/'
-        cd %GITHUB_WORKSPACE%\quickjs\
+        msys2 -c 'cp -r qjs-build/* quickjs/'
+        cd quickjs
         msys2 -c 'sh make_linux64.sh'
     - uses: actions/upload-artifact@v2
       with:
