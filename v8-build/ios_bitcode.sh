@@ -36,6 +36,7 @@ target_cpu = "arm64"
 v8_target_cpu = "arm64"
 target_os = "ios"
 ios_deployment_target = "9.0"
+ios_enable_code_signing = false
 '
 ninja -C out.gn/arm64.release -t clean
 ninja -C out.gn/arm64.release wee8
