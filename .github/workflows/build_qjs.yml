@@ -77,18 +77,43 @@ jobs:
       with:
         repository: 'bellard/quickjs'
         path: ${{github.workspace}}/quickjs/
-    - uses: msys2/setup-msys2@v2
-    - name: Run build script
+    - name: Install dependencies on Windows
+      if: startsWith(matrix.config.os, 'windows')
       run: |
-        msys2 -c 'yes|pacman -Scc cmake'
-        cmake --version
-        msys2 -c 'cmake --version'
-        msys2 -c 'cp -r qjs-build/* quickjs/'
-        cd quickjs
-        msys2 -c 'sh make_linux64.sh'
+        echo "Install for windows ..."
+        choco install wget
+        choco install 7zip.install
+    - name: Install compiler on Windows
+      if: startsWith(matrix.config.os, 'windows')
+      shell: bash
+      run: |
+        wget -O tdm-gcc.zip https://github.com/napi-bindings/tdm-gcc/archive/v9.2.0.zip
+        7z x tdm-gcc.zip -o/
+    - name: Configure on Windows
+      if: startsWith(matrix.config.os, 'windows')
+      shell: bash
+      run: |
+        mkdir ./build
+        mkdir ./qjs
+        cmake \
+          -DCMAKE_MAKE_PROGRAM=/tdm-gcc-9.2.0/bin/mingw32-make.exe \
+          -DCMAKE_C_COMPILER=/tdm-gcc-9.2.0/bin/gcc.exe \
+          -DCMAKE_CXX_COMPILER=/tdm-gcc-9.2.0/bin/g++.exe \
+          -DCMAKE_BUILD_TYPE=Release \
+          -G "CodeBlocks - Unix Makefiles" \
+          -S ./ \
+          -B ./build
+    - name: Build
+      shell: bash
+      run: cmake --build ./build --config Release
+    - name: "Prepare"
+      shell: bash
+      run: |
+        mkdir -p qjs/Lib/Win64/
+        cp build/libqjs.a qjs/Lib/Win64/ 
     - uses: actions/upload-artifact@v2
       with:
         name: qjs_bin
-        path: ~/qjs/**/*
+        path: qjs/**/*
 
 
