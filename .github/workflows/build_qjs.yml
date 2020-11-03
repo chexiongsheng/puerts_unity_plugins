@@ -1,0 +1,28 @@
+name: Build quickjs
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  build_ubuntu:
+    name: Ubuntu 
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Checkout quickjs
+      uses: actions/checkout@v2
+      with:
+        repository: 'bellard/quickjs'
+        path: ${{github.workspace}}/quickjs/
+    - name: Run build script
+      run: |
+        cd $GITHUB_WORKSPACE
+        cp qjs-build/* $GITHUB_WORKSPACE/quickjs/
+        cd $GITHUB_WORKSPACE/quickjs/
+        sh make_linux64.sh
+    - uses: actions/upload-artifact@v2
+      with:
+        name: qjs_bin
+        path: ~/qjs/**/*
+
+
