@@ -20,7 +20,7 @@ gclient sync
 
 echo "=====[ Building V8 ]====="
 python ./tools/dev/v8gen.py arm64.release -vv -- '
-v8_use_external_startup_data = false
+v8_use_external_startup_data = true
 v8_use_snapshot = true
 v8_enable_i18n_support = false
 is_debug = false
@@ -35,9 +35,9 @@ ninja -C out.gn/arm64.release -t clean
 ninja -C out.gn/arm64.release v8_monolith
 strip -S out.gn/arm64.release/obj/libv8_monolith.a
 
-#node $GITHUB_WORKSPACE/v8-build/genBlobHeader.js "ios arm64" out.gn/arm64.release/snapshot_blob.bin
-
 mkdir -p output/v8/Lib/iOS/arm64
 cp out.gn/arm64.release/obj/libv8_monolith.a output/v8/Lib/iOS/arm64/
-#mkdir -p output/v8/Inc/Blob/iOS/arm64
-#cp SnapshotBlob.h output/v8/Inc/Blob/iOS/arm64/
+
+node $GITHUB_WORKSPACE/v8-build/genBlobHeader.js "ios arm64" out.gn/arm64.release/snapshot_blob.bin
+mkdir -p output/v8/Inc/Blob/iOS/arm64
+cp SnapshotBlob.h output/v8/Inc/Blob/iOS/arm64/
