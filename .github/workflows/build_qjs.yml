@@ -66,5 +66,27 @@ jobs:
       with:
         name: qjs_bin
         path: ~/qjs/**/*
+        
+  build_window:
+    name: Windows
+    runs-on: windows-2019
+    steps:
+    - uses: actions/checkout@v2
+    - name: Checkout quickjs
+      uses: actions/checkout@v2
+      with:
+        repository: 'bellard/quickjs'
+        path: ${{github.workspace}}/quickjs/
+    - uses: msys2/setup-msys2@v2
+    - name: Run build script
+      run: |
+        cd %GITHUB_WORKSPACE%
+        msys2 -c 'cp -r qjs-build/* %GITHUB_WORKSPACE%/quickjs/'
+        cd %GITHUB_WORKSPACE%\quickjs\
+        msys2 -c 'sh make_linux64.sh'
+    - uses: actions/upload-artifact@v2
+      with:
+        name: qjs_bin
+        path: ~/qjs/**/*
 
 
