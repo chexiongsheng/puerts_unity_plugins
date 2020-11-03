@@ -41,6 +41,7 @@ jobs:
         cp qjs-build/* $GITHUB_WORKSPACE/quickjs/
         cd $GITHUB_WORKSPACE/quickjs/
         sh make_osx.sh
+        sh make_ios.sh
     - uses: actions/upload-artifact@v2
       with:
         name: qjs_bin
