@@ -137,16 +137,16 @@ jobs:
         name: v8_bin
         path: ~/v8/v8/output/**/*
         
-  build_ios_bc:
-    name: iOS_bc
-    runs-on: macos-10.15
-    steps:
-    - uses: actions/checkout@v2
-    - name: Run build script
-      run: |
-        cd $GITHUB_WORKSPACE
-        sh ./v8-build/ios_bitcode.sh ${{env.VERSION}}
-    - uses: actions/upload-artifact@v2
-      with:
-        name: v8_bin
-        path: ~/v8/v8/output/**/*
+#  build_ios_bc:
+#    name: iOS_bc
+#    runs-on: macos-10.15
+#    steps:
+#    - uses: actions/checkout@v2
+#    - name: Run build script
+#      run: |
+#        cd $GITHUB_WORKSPACE
+#        sh ./v8-build/ios_bitcode.sh ${{env.VERSION}}
+#    - uses: actions/upload-artifact@v2
+#      with:
+#        name: v8_bin
+#        path: ~/v8/v8/output/**/*
