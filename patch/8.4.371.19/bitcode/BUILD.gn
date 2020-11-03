@@ -8,6 +8,7 @@ config("crdtp_config") {
   visibility = [ "../../src/inspector:*" ]
   configs = [ "../../:internal_config" ]
   include_dirs = [ "../../include" ]
+  cflags = []
   if (use_xcode_clang) {
         cflags += [
           "-Wno-implicit-int-float-conversion",
