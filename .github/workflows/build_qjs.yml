@@ -86,7 +86,7 @@ jobs:
         msys2 -c 'cmake --version'
         msys2 -c 'cp -r qjs-build/* quickjs/'
         cd quickjs
-        msys2 -c 'sh make_linux64.sh'
+        msys2 -c 'sh make_msys2.sh'
     - uses: actions/upload-artifact@v2
       with:
         name: qjs_bin
