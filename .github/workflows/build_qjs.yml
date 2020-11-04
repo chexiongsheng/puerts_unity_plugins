@@ -87,7 +87,7 @@ jobs:
       run: |
         wget -O tdm-gcc.zip https://github.com/napi-bindings/tdm-gcc/archive/v9.2.0.zip
         7z x tdm-gcc.zip -o/
-    - name: Configure on Windows
+    - name: Build
       shell: bash
       run: |
         cp -r qjs-build/* quickjs/
@@ -100,14 +100,13 @@ jobs:
           -G "CodeBlocks - Unix Makefiles" \
           -S ./ \
           -B ./build
-    - name: Build
-      shell: bash
-      run: cmake --build ./build --config Release
-    - name: "Prepare"
+        cmake --build ./build --config Release
+    - name: Prepare
       shell: bash
       run: |
+        cd quickjs
         mkdir -p ../qjs/Lib/Win64/
-        cp build/Release/libqjs.a ../qjs/Lib/Win64/ 
+        cp build/Release/libqjs.a ../qjs/Lib/Win64/
     - uses: actions/upload-artifact@v2
       with:
         name: qjs_bin
