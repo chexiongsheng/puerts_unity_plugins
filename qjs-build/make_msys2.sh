@@ -1,6 +1,6 @@
 mkdir -p build && cd build
-cmake cmake -G"CodeBlocks - Unix Makefiles" ../ 
+cmake ../ 
 cd ..
 cmake --build build --config Release
-mkdir -p ../qjs/Lib/Win64/
-cp build/libqjs.a ../qjs/Lib/Win64/ 
+mkdir -p qjs/Lib/Win64/
+cp build/libqjs.a qjs/Lib/Win64/ 
