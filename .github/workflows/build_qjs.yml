@@ -206,7 +206,8 @@ jobs:
         cd $GITHUB_WORKSPACE
         cp -r qjs-build/* $GITHUB_WORKSPACE/quickjs/
         cd $GITHUB_WORKSPACE/quickjs/
-        sh make_android.sh
+        chmod +x make_android.sh
+        ./make_android.sh
     - uses: actions/upload-artifact@v2
       with:
         name: qjs_bin
