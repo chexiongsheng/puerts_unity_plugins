@@ -139,4 +139,4 @@ jobs:
       run: |
         cp -r qjs-build/* quickjs/
         cd quickjs
-        sh make_msys2.sh
+        make LDEXPORT="-static -s"
