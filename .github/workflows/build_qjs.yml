@@ -137,6 +137,48 @@ jobs:
         echo "\"mingw32-make\" \"\$@\"" >> /mingw64/bin/make
     - shell: msys2 {0}
       run: |
-        cp -r qjs-build/* quickjs/
         cd quickjs
         make libquickjs.a
+    - name: Prepare
+      shell: bash
+      run: |
+        cd quickjs
+        mkdir -p ../qjs/Lib/Win64/
+        cp build/libquickjs.a ../qjs/Lib/Win64/libqjs.a
+    - uses: actions/upload-artifact@v2
+      with:
+        name: qjs_bin
+        path: qjs/**/*
+
+  build_window_32:
+    name: Windows32
+    runs-on: windows-2019
+    steps:
+    - uses: actions/checkout@v2
+    - name: Checkout quickjs
+      uses: actions/checkout@v2
+      with:
+        repository: 'bellard/quickjs'
+        path: ${{github.workspace}}/quickjs/
+    - uses: msys2/setup-msys2@v2
+      with:
+        update: true
+        install: 'cmake mingw-w64-i686-gcc mingw-w64-i686-make mingw-w64-i686-dlfcn'
+    - shell: msys2 {0}
+      run: |
+        echo "#! /bin/sh" > /mingw32/bin/make
+        echo "\"mingw32-make\" \"\$@\"" >> /mingw32/bin/make
+    - shell: msys2 {0}
+      run: |
+        cd quickjs
+        make libquickjs.a
+    - name: Prepare
+      shell: bash
+      run: |
+        cd quickjs
+        mkdir -p ../qjs/Lib/Win32/
+        cp build/libquickjs.a ../qjs/Lib/Win32/libqjs.a
+    - uses: actions/upload-artifact@v2
+      with:
+        name: qjs_bin
+        path: qjs/**/*
