@@ -2,70 +2,72 @@ name: Build quickjs
 
 on: 
   push:
+    paths: 
+      - .github/workflows/build_qjs.yml
 
 jobs:
-#  build_ubuntu:
-#    name: Ubuntu 
-#    runs-on: ubuntu-18.04
-#    steps:
-#    - uses: actions/checkout@v2
-#    - name: Checkout quickjs
-#      uses: actions/checkout@v2
-#      with:
-#        repository: 'bellard/quickjs'
-#        path: ${{github.workspace}}/quickjs/
-#    - name: Run build script
-#      run: |
-#        cd $GITHUB_WORKSPACE
-#        cp -r qjs-build/* $GITHUB_WORKSPACE/quickjs/
-#        cd $GITHUB_WORKSPACE/quickjs/
-#        sh make_linux64.sh
-#    - uses: actions/upload-artifact@v2
-#      with:
-#        name: qjs_bin
-#        path: ~/qjs/**/*
-#        
-#  build_macos:
-#    name: macOS
-#    runs-on: macos-10.15
-#    steps:
-#    - uses: actions/checkout@v2
-#    - name: Checkout quickjs
-#      uses: actions/checkout@v2
-#      with:
-#        repository: 'bellard/quickjs'
-#        path: ${{github.workspace}}/quickjs/
-#    - name: Run build script
-#      run: |
-#        cd $GITHUB_WORKSPACE
-#        cp -r qjs-build/* $GITHUB_WORKSPACE/quickjs/
-#        cd $GITHUB_WORKSPACE/quickjs/
-#        sh make_osx.sh
-#    - uses: actions/upload-artifact@v2
-#      with:
-#        name: qjs_bin
-#        path: ~/qjs/**/*
-#        
-#  build_ios:
-#    name: iOS
-#    runs-on: macos-10.15
-#    steps:
-#    - uses: actions/checkout@v2
-#    - name: Checkout quickjs
-#      uses: actions/checkout@v2
-#      with:
-#        repository: 'bellard/quickjs'
-#        path: ${{github.workspace}}/quickjs/
-#    - name: Run build script
-#      run: |
-#        cd $GITHUB_WORKSPACE
-#        cp -r qjs-build/* $GITHUB_WORKSPACE/quickjs/
-#        cd $GITHUB_WORKSPACE/quickjs/
-#        sh make_ios.sh
-#    - uses: actions/upload-artifact@v2
-#      with:
-#        name: qjs_bin
-#        path: ~/qjs/**/*
+  build_ubuntu:
+    name: Ubuntu 
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Checkout quickjs
+      uses: actions/checkout@v2
+      with:
+        repository: 'bellard/quickjs'
+        path: ${{github.workspace}}/quickjs/
+    - name: Run build script
+      run: |
+        cd $GITHUB_WORKSPACE
+        cp -r qjs-build/* $GITHUB_WORKSPACE/quickjs/
+        cd $GITHUB_WORKSPACE/quickjs/
+        sh make_linux64.sh
+    - uses: actions/upload-artifact@v2
+      with:
+        name: qjs_bin
+        path: ~/qjs/**/*
+        
+  build_macos:
+    name: macOS
+    runs-on: macos-10.15
+    steps:
+    - uses: actions/checkout@v2
+    - name: Checkout quickjs
+      uses: actions/checkout@v2
+      with:
+        repository: 'bellard/quickjs'
+        path: ${{github.workspace}}/quickjs/
+    - name: Run build script
+      run: |
+        cd $GITHUB_WORKSPACE
+        cp -r qjs-build/* $GITHUB_WORKSPACE/quickjs/
+        cd $GITHUB_WORKSPACE/quickjs/
+        sh make_osx.sh
+    - uses: actions/upload-artifact@v2
+      with:
+        name: qjs_bin
+        path: ~/qjs/**/*
+        
+  build_ios:
+    name: iOS
+    runs-on: macos-10.15
+    steps:
+    - uses: actions/checkout@v2
+    - name: Checkout quickjs
+      uses: actions/checkout@v2
+      with:
+        repository: 'bellard/quickjs'
+        path: ${{github.workspace}}/quickjs/
+    - name: Run build script
+      run: |
+        cd $GITHUB_WORKSPACE
+        cp -r qjs-build/* $GITHUB_WORKSPACE/quickjs/
+        cd $GITHUB_WORKSPACE/quickjs/
+        sh make_ios.sh
+    - uses: actions/upload-artifact@v2
+      with:
+        name: qjs_bin
+        path: ~/qjs/**/*
         
   build_window:
     name: Windows
@@ -106,7 +108,7 @@ jobs:
       run: |
         cd quickjs
         mkdir -p ../qjs/Lib/Win64/
-        cp build/Release/libqjs.a ../qjs/Lib/Win64/
+        cp build/libqjs.a ../qjs/Lib/Win64/
     - uses: actions/upload-artifact@v2
       with:
         name: qjs_bin
