@@ -183,3 +183,31 @@ jobs:
       with:
         name: qjs_bin
         path: qjs/**/*
+
+  build_android:
+    name: Android 
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Checkout quickjs
+      uses: actions/checkout@v2
+      with:
+        repository: 'bellard/quickjs'
+        path: ${{github.workspace}}/quickjs/
+    - name: Install NDK
+      run: |
+        cd ~
+        wget -O NDK -q https://dl.google.com/android/repository/android-ndk-r15c-linux-x86_64.zip
+        sudo apt install unzip -y
+        unzip -q NDK
+        ANDROID_NDK_HOME=$(pwd)/android-ndk-r15c
+    - name: Run build script
+      run: |
+        cd $GITHUB_WORKSPACE
+        cp -r qjs-build/* $GITHUB_WORKSPACE/quickjs/
+        cd $GITHUB_WORKSPACE/quickjs/
+        sh make_android.sh
+    - uses: actions/upload-artifact@v2
+      with:
+        name: qjs_bin
+        path: ~/qjs/**/*
