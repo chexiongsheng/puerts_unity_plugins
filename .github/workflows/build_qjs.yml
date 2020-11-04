@@ -90,13 +90,13 @@ jobs:
     - name: Configure on Windows
       shell: bash
       run: |
-        mkdir ./build
-        mkdir ./qjs
+        cp -r qjs-build/* quickjs/
+        cd quickjs
+        mkdir build
         cmake \
           -DCMAKE_MAKE_PROGRAM=/tdm-gcc-9.2.0/bin/mingw32-make.exe \
           -DCMAKE_C_COMPILER=/tdm-gcc-9.2.0/bin/gcc.exe \
           -DCMAKE_CXX_COMPILER=/tdm-gcc-9.2.0/bin/g++.exe \
-          -DCMAKE_BUILD_TYPE=Release \
           -G "CodeBlocks - Unix Makefiles" \
           -S ./ \
           -B ./build
@@ -106,8 +106,8 @@ jobs:
     - name: "Prepare"
       shell: bash
       run: |
-        mkdir -p qjs/Lib/Win64/
-        cp build/libqjs.a qjs/Lib/Win64/ 
+        mkdir -p ../qjs/Lib/Win64/
+        cp build/Release/libqjs.a ../qjs/Lib/Win64/ 
     - uses: actions/upload-artifact@v2
       with:
         name: qjs_bin
