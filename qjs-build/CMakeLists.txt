@@ -35,6 +35,8 @@ target_compile_options(qjs PRIVATE ${qjs_cflags})
 target_compile_definitions(qjs PUBLIC
         QJS_VERSION_STR="${QJS_VERSION_STR}"
         )
+        
+MESSAGE( STATUS "QJS_VERSION_STR = \"${QJS_VERSION_STR}\".")
 target_compile_definitions(qjs PRIVATE
         CONFIG_BIGNUM
         CONFIG_VERSION="\"${QJS_VERSION_STR}\""
