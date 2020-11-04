@@ -16,6 +16,8 @@ else()
             -Wno-array-bounds
             -Wno-unused-variable
             -Wno-format-truncation
+            -MMD
+            -MF
             -Wno-unused-but-set-variable)
 endif()
 
@@ -28,10 +30,10 @@ add_library(qjs STATIC
         libunicode.c
         quickjs.c
         )
-set_target_properties(qjs PROPERTIES
-        C_STANDARD 11
-        C_STANDARD_REQUIRED ON
-        )
+#set_target_properties(qjs PROPERTIES
+#        C_STANDARD 11
+#        C_STANDARD_REQUIRED ON
+#        )
 target_compile_options(qjs PRIVATE ${qjs_cflags})
 
 target_compile_definitions(qjs PUBLIC
