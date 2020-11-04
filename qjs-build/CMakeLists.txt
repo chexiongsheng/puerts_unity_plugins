@@ -38,6 +38,8 @@ target_compile_options(qjs PRIVATE ${qjs_cflags})
 
 target_compile_definitions(qjs PUBLIC
         CONFIG_BIGNUM
+        _GNU_SOURCE
+        CONFIG_CHECK_JSVALUE
         CONFIG_VERSION="${QJS_VERSION_STR}"
         )
 if (CMAKE_BUILD_TYPE MATCHES Debug)
