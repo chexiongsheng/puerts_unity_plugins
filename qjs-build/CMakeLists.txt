@@ -37,7 +37,7 @@ target_compile_definitions(qjs PUBLIC
         )
 target_compile_definitions(qjs PRIVATE
         CONFIG_BIGNUM
-        CONFIG_VERSION="${QJS_VERSION_STR}"
+        CONFIG_VERSION="\"${QJS_VERSION_STR}\""
         )
 if (CMAKE_BUILD_TYPE MATCHES Debug)
     target_compile_definitions(qjs PRIVATE
