@@ -162,17 +162,16 @@ jobs:
         path: ${{github.workspace}}/quickjs/
     - uses: msys2/setup-msys2@v2
       with:
+        msystem: MSYS
         update: true
         install: 'cmake mingw-w64-i686-gcc mingw-w64-i686-make mingw-w64-i686-dlfcn'
-    #- shell: msys2 {0}
-    #  run: |
-    #    echo "#! /bin/sh" > /mingw32/bin/make
-    #    echo "\"mingw32-make\" \"\$@\"" >> /mingw32/bin/make
+    - shell: msys2 {0}
+      run: |
+        echo "#! /bin/sh" > /mingw32/bin/make
+        echo "\"mingw32-make\" \"\$@\"" >> /mingw32/bin/make
     - shell: msys2 {0}
       run: |
         cd quickjs
-        which make
-        which mingw32-make
         make libquickjs.a
     - name: Prepare
       shell: bash
