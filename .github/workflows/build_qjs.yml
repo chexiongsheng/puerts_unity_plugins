@@ -22,6 +22,8 @@ jobs:
         cp -r qjs-build/* $GITHUB_WORKSPACE/quickjs/
         cd $GITHUB_WORKSPACE/quickjs/
         sh make_linux64.sh
+        mkdir -p ~/qjs/Inc
+        cp quickjs.h ~/qjs/Inc
     - uses: actions/upload-artifact@v2
       with:
         name: qjs_bin
