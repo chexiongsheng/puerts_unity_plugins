@@ -17,7 +17,6 @@ else()
             -Wno-unused-variable
             -Wno-format-truncation
             -MMD
-            -MF
             -Wno-unused-but-set-variable)
 endif()
 
