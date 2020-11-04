@@ -6,71 +6,116 @@ on:
       - .github/workflows/build_qjs.yml
 
 jobs:
-  build_ubuntu:
-    name: Ubuntu 
-    runs-on: ubuntu-18.04
-    steps:
-    - uses: actions/checkout@v2
-    - name: Checkout quickjs
-      uses: actions/checkout@v2
-      with:
-        repository: 'bellard/quickjs'
-        path: ${{github.workspace}}/quickjs/
-    - name: Run build script
-      run: |
-        cd $GITHUB_WORKSPACE
-        cp -r qjs-build/* $GITHUB_WORKSPACE/quickjs/
-        cd $GITHUB_WORKSPACE/quickjs/
-        sh make_linux64.sh
-        mkdir -p ~/qjs/Inc
-        cp quickjs.h ~/qjs/Inc
-    - uses: actions/upload-artifact@v2
-      with:
-        name: qjs_bin
-        path: ~/qjs/**/*
-        
-  build_macos:
-    name: macOS
-    runs-on: macos-10.15
-    steps:
-    - uses: actions/checkout@v2
-    - name: Checkout quickjs
-      uses: actions/checkout@v2
-      with:
-        repository: 'bellard/quickjs'
-        path: ${{github.workspace}}/quickjs/
-    - name: Run build script
-      run: |
-        cd $GITHUB_WORKSPACE
-        cp -r qjs-build/* $GITHUB_WORKSPACE/quickjs/
-        cd $GITHUB_WORKSPACE/quickjs/
-        sh make_osx.sh
-    - uses: actions/upload-artifact@v2
-      with:
-        name: qjs_bin
-        path: ~/qjs/**/*
-        
-  build_ios:
-    name: iOS
-    runs-on: macos-10.15
-    steps:
-    - uses: actions/checkout@v2
-    - name: Checkout quickjs
-      uses: actions/checkout@v2
-      with:
-        repository: 'bellard/quickjs'
-        path: ${{github.workspace}}/quickjs/
-    - name: Run build script
-      run: |
-        cd $GITHUB_WORKSPACE
-        cp -r qjs-build/* $GITHUB_WORKSPACE/quickjs/
-        cd $GITHUB_WORKSPACE/quickjs/
-        sh make_ios.sh
-    - uses: actions/upload-artifact@v2
-      with:
-        name: qjs_bin
-        path: ~/qjs/**/*
-        
+#  build_ubuntu:
+#    name: Ubuntu 
+#    runs-on: ubuntu-18.04
+#    steps:
+#    - uses: actions/checkout@v2
+#    - name: Checkout quickjs
+#      uses: actions/checkout@v2
+#      with:
+#        repository: 'bellard/quickjs'
+#        path: ${{github.workspace}}/quickjs/
+#    - name: Run build script
+#      run: |
+#        cd $GITHUB_WORKSPACE
+#        cp -r qjs-build/* $GITHUB_WORKSPACE/quickjs/
+#        cd $GITHUB_WORKSPACE/quickjs/
+#        sh make_linux64.sh
+#        mkdir -p ~/qjs/Inc
+#        cp quickjs.h ~/qjs/Inc
+#    - uses: actions/upload-artifact@v2
+#      with:
+#        name: qjs_bin
+#        path: ~/qjs/**/*
+#        
+#  build_macos:
+#    name: macOS
+#    runs-on: macos-10.15
+#    steps:
+#    - uses: actions/checkout@v2
+#    - name: Checkout quickjs
+#      uses: actions/checkout@v2
+#      with:
+#        repository: 'bellard/quickjs'
+#        path: ${{github.workspace}}/quickjs/
+#    - name: Run build script
+#      run: |
+#        cd $GITHUB_WORKSPACE
+#        cp -r qjs-build/* $GITHUB_WORKSPACE/quickjs/
+#        cd $GITHUB_WORKSPACE/quickjs/
+#        sh make_osx.sh
+#    - uses: actions/upload-artifact@v2
+#      with:
+#        name: qjs_bin
+#        path: ~/qjs/**/*
+#        
+#  build_ios:
+#    name: iOS
+#    runs-on: macos-10.15
+#    steps:
+#    - uses: actions/checkout@v2
+#    - name: Checkout quickjs
+#      uses: actions/checkout@v2
+#      with:
+#        repository: 'bellard/quickjs'
+#        path: ${{github.workspace}}/quickjs/
+#    - name: Run build script
+#      run: |
+#        cd $GITHUB_WORKSPACE
+#        cp -r qjs-build/* $GITHUB_WORKSPACE/quickjs/
+#        cd $GITHUB_WORKSPACE/quickjs/
+#        sh make_ios.sh
+#    - uses: actions/upload-artifact@v2
+#      with:
+#        name: qjs_bin
+#        path: ~/qjs/**/*
+#        
+#  build_window:
+#    name: Windows
+#    runs-on: windows-2019
+#    steps:
+#    - uses: actions/checkout@v2
+#    - name: Checkout quickjs
+#      uses: actions/checkout@v2
+#      with:
+#        repository: 'bellard/quickjs'
+#        path: ${{github.workspace}}/quickjs/
+#    - name: Install dependencies on Windows
+#      run: |
+#        echo "Install for windows ..."
+#        choco install wget
+#        choco install 7zip.install
+#    - name: Install compiler on Windows
+#      shell: bash
+#      run: |
+#        wget -O tdm-gcc.zip https://github.com/napi-bindings/tdm-gcc/archive/v9.2.0.zip
+#        7z x tdm-gcc.zip -o/
+#    - name: Build
+#      shell: bash
+#      run: |
+#        cp -r qjs-build/* quickjs/
+#        cd quickjs
+#        mkdir build
+#        cmake \
+#          -DCMAKE_MAKE_PROGRAM=/tdm-gcc-9.2.0/bin/mingw32-make.exe \
+#          -DCMAKE_C_COMPILER=/tdm-gcc-9.2.0/bin/gcc.exe \
+#          -DCMAKE_CXX_COMPILER=/tdm-gcc-9.2.0/bin/g++.exe \
+#          -G "CodeBlocks - Unix Makefiles" \
+#          -S ./ \
+#          -B ./build
+#        cmake --build ./build --config Release
+#    - name: Prepare
+#      shell: bash
+#      run: |
+#        cd quickjs
+#        mkdir -p ../qjs/Lib/Win64/
+#        cp build/libqjs.a ../qjs/Lib/Win64/
+#    - uses: actions/upload-artifact@v2
+#      with:
+#        name: qjs_bin
+#        path: qjs/**/*
+
   build_window:
     name: Windows
     runs-on: windows-2019
@@ -81,39 +126,12 @@ jobs:
       with:
         repository: 'bellard/quickjs'
         path: ${{github.workspace}}/quickjs/
-    - name: Install dependencies on Windows
-      run: |
-        echo "Install for windows ..."
-        choco install wget
-        choco install 7zip.install
-    - name: Install compiler on Windows
-      shell: bash
-      run: |
-        wget -O tdm-gcc.zip https://github.com/napi-bindings/tdm-gcc/archive/v9.2.0.zip
-        7z x tdm-gcc.zip -o/
-    - name: Build
-      shell: bash
+    - uses: msys2/setup-msys2@v2
+      with:
+        update: true
+        install: 'cmake mingw-w64-x86_64-gcc mingw-w64-x86_64-make mingw-w64-x86_64-dlfcn'
+    - shell: msys2 {0}
       run: |
         cp -r qjs-build/* quickjs/
         cd quickjs
-        mkdir build
-        cmake \
-          -DCMAKE_MAKE_PROGRAM=/tdm-gcc-9.2.0/bin/mingw32-make.exe \
-          -DCMAKE_C_COMPILER=/tdm-gcc-9.2.0/bin/gcc.exe \
-          -DCMAKE_CXX_COMPILER=/tdm-gcc-9.2.0/bin/g++.exe \
-          -G "CodeBlocks - Unix Makefiles" \
-          -S ./ \
-          -B ./build
-        cmake --build ./build --config Release
-    - name: Prepare
-      shell: bash
-      run: |
-        cd quickjs
-        mkdir -p ../qjs/Lib/Win64/
-        cp build/libqjs.a ../qjs/Lib/Win64/
-    - uses: actions/upload-artifact@v2
-      with:
-        name: qjs_bin
-        path: qjs/**/*
-
-
+        sh make_msys2.sh
