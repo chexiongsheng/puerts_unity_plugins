@@ -138,13 +138,13 @@ jobs:
     - shell: msys2 {0}
       run: |
         cd quickjs
-        make libquickjs.a
+        make LDEXPORT="-static -s" libquickjs.a
     - name: Prepare
       shell: bash
       run: |
         cd quickjs
         mkdir -p ../qjs/Lib/Win64/
-        cp build/libquickjs.a ../qjs/Lib/Win64/libqjs.a
+        cp libquickjs.a ../qjs/Lib/Win64/libqjs.a
     - uses: actions/upload-artifact@v2
       with:
         name: qjs_bin
@@ -171,13 +171,13 @@ jobs:
     - shell: msys2 {0}
       run: |
         cd quickjs
-        make libquickjs.a
+        make LDEXPORT="-static -s" libquickjs.a
     - name: Prepare
       shell: bash
       run: |
         cd quickjs
         mkdir -p ../qjs/Lib/Win32/
-        cp build/libquickjs.a ../qjs/Lib/Win32/libqjs.a
+        cp libquickjs.a ../qjs/Lib/Win32/libqjs.a
     - uses: actions/upload-artifact@v2
       with:
         name: qjs_bin
