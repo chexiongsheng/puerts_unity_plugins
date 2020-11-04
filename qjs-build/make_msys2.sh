@@ -1,5 +1,5 @@
 mkdir -p build && cd build
-cmake ../ 
+cmake -G"Unix Makefiles" ../ 
 cd ..
 cmake --build build --config Release
 mkdir -p qjs/Lib/Win64/
