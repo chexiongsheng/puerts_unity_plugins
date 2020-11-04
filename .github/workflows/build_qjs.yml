@@ -4,6 +4,7 @@ on:
   push:
     paths: 
       - .github/workflows/build_qjs.yml
+      - qjs-build/*
 
 jobs:
 #  build_ubuntu:
