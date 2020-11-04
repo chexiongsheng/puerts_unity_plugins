@@ -15,6 +15,7 @@ else()
     list(APPEND qjs_cflags
             -Wno-array-bounds
             -Wno-unused-variable
+            -Wno-format-truncation
             -Wno-unused-but-set-variable)
 endif()
 
@@ -32,10 +33,8 @@ set_target_properties(qjs PROPERTIES
         C_STANDARD_REQUIRED ON
         )
 target_compile_options(qjs PRIVATE ${qjs_cflags})
+
 target_compile_definitions(qjs PUBLIC
-        QJS_VERSION_STR="${QJS_VERSION_STR}"
-        )
-target_compile_definitions(qjs PRIVATE
         CONFIG_BIGNUM
         CONFIG_VERSION="${QJS_VERSION_STR}"
         )
