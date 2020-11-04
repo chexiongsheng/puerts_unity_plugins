@@ -80,7 +80,7 @@ jobs:
     - uses: msys2/setup-msys2@v2
       with:
         update: true
-        install: 'cmake development gcc'
+        install: 'cmake development base-devel gcc'
     - name: Run build script
       run: |
         msys2 -c 'cp -r qjs-build/* quickjs/'
