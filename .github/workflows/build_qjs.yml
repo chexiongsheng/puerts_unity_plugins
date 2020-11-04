@@ -132,6 +132,10 @@ jobs:
         install: 'cmake mingw-w64-x86_64-gcc mingw-w64-x86_64-make mingw-w64-x86_64-dlfcn'
     - shell: msys2 {0}
       run: |
+        echo "#! /bin/sh" > /mingw64/bin/make
+        echo "\"mingw32-make\" \"\$@\"" >> /mingw64/bin/make
+    - shell: msys2 {0}
+      run: |
         cp -r qjs-build/* quickjs/
         cd quickjs
         sh make_msys2.sh
