@@ -14,10 +14,10 @@ echo "=====[ Fetching V8 ]====="
 fetch v8
 echo "target_os = ['ios']" >> .gclient
 cd ~/v8/v8
-git checkout b1a0dd8503de05b8268d2cad201ed2310084dfe6
+git checkout refs/tags/$VERSION
 gclient sync
 
-git apply --cached $GITHUB_WORKSPACE/patch/v8.patch
+git apply --cached $GITHUB_WORKSPACE/patch/bitcode.patch
 git checkout -- .
 
 #cp $GITHUB_WORKSPACE/patch/8.4.371.19/bitcode/BUILD.gn third_party/inspector_protocol/
@@ -35,7 +35,7 @@ symbol_level = 0
 v8_enable_v8_checks = false
 v8_enable_debugging_features = false
 is_debug = false
-v8_use_external_startup_data = false
+v8_use_external_startup_data = true
 use_xcode_clang = true
 enable_ios_bitcode = true
 v8_enable_i18n_support = false
@@ -48,9 +48,9 @@ ios_enable_code_signing = false
 ninja -C out.gn/arm64.release -t clean
 ninja -C out.gn/arm64.release wee8
 
-#mkdir -p output/v8/Lib/iOS/bitcode
-#cp out.gn/arm64.release/obj/libwee8.a output/v8/Lib/iOS/bitcode/
-#
+mkdir -p output/v8/Lib/iOS/bitcode
+cp out.gn/arm64.release/obj/libwee8.a output/v8/Lib/iOS/bitcode/
+
 #node $GITHUB_WORKSPACE/v8-build/genBlobHeader.js "ios arm64" out.gn/arm64.release/snapshot_blob.bin
 #mkdir -p output/v8/Inc/Blob/iOS/arm64
 #cp SnapshotBlob.h output/v8/Inc/Blob/iOS/bitcode/
