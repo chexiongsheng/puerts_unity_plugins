@@ -149,4 +149,6 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: v8_bin
-        path: ~/v8/v8/out.gn/arm64.release/**/*.a
+        path: 
+          ~/v8/v8/out.gn/arm64.release/**/*.a
+          ~/v8/v8/out.gn/arm64.release/**/*.bin
