@@ -14,8 +14,11 @@ echo "=====[ Fetching V8 ]====="
 fetch v8
 echo "target_os = ['ios']" >> .gclient
 cd ~/v8/v8
-git checkout refs/tags/$VERSION
+git checkout b1a0dd8503de05b8268d2cad201ed2310084dfe6
 gclient sync
+
+git apply --cached $GITHUB_WORKSPACE/patch/v8.patch
+git checkout -- .
 
 #cp $GITHUB_WORKSPACE/patch/8.4.371.19/bitcode/BUILD.gn third_party/inspector_protocol/
 
